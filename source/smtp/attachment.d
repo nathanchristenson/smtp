@@ -5,7 +5,7 @@ import std.conv;
 import std.string;
 
 /**
-  Implements mail message attachment.
+  Struct that implements an email message attachment.
  */
 struct SmtpAttachment
 {

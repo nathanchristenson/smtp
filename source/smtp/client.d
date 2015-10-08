@@ -22,13 +22,13 @@ enum SmtpAuthType {
  Low-level synchronous API for implementing SMTP clients.
 
  SmtpClient handles:
-  + TCP data transmission and buffers management
+  + TCP data transmission and buffer management
   + TLS/SSL channel encryption
   + SMTP protocol request/reply handling
   + transport layer exceptions
 
  SmtpClient does NOT handle:
-  * semantic class usage mistakes like bad commands sequences
+  + semantic class usage mistakes like bad commands sequences
 
  Supported SMTP commands:
   NOOP, HELO, EHLO, MAIL, RSET, RCPT, DATA (data, dataBody), AUTH (auth, authPlain),
@@ -53,7 +53,7 @@ protected:
 	}
 
 	/++
-	 Convenience method to send whole buffer of data into socket.
+	 Convenience method to send whole buffer of data to socket.
 	 +/
 	bool sendData(in char[] data) {
 		// SSL Enabled
@@ -112,7 +112,7 @@ protected:
 	}
 
 	/++
-	 Implementation of request/response pattern for easifying
+	 Implementation of request/response pattern to simplify
 	 communication with SMTP server.
 	 +/
 	string getResponse(string command, string suffix="\r\n") {
@@ -141,8 +141,8 @@ public:
 	@property authenticated() const { return _authenticated; }
 
 	/++
-	 Performs socket connection establishment.
-	 connect is the first method to be called after SmtpClient instantiation.
+	 Establishes socket connection.
+	 'connect' is the first method to be called after SmtpClient instantiation.
 	 +/
 	SmtpReply connect() {
 		try {
@@ -170,8 +170,8 @@ public:
 	}
 
 	/++
-	 A `no operation` message. essage that does not invoke any specific routine
-	 on server, but still the reply is received.
+	 A `no operation` message that does not invoke any specific routine
+	 on server, but indicates that the reply is received.
 	 +/
 	final SmtpReply noop() {
 		return parseReply(getResponse("NOOP"));
@@ -268,7 +268,7 @@ public:
 	}
 
 	/++
-	 This method asks server to verify if the user's mailbox exists on server.
+	 This method asks a server to verify that the user's mailbox exists on that server.
 	 You can pass [username] or <[e-mail]> as an argument. The result is a reply
 	 that contains e-mail of the user, or an error code.
 
@@ -281,16 +281,16 @@ public:
 
 	/++
 	 EXPN expands mailing list on the server. If mailing list is not available
-	 for you, you receive appropriate error reply, else you receive a list of
-	 mailiing list subscribers.
+	 for you, you receive appropriate error reply; otherwise, you receive a list of
+	 mailing list subscribers.
 	 +/
 	final SmtpReply expn(string mailinglist) {
 		return parseReply(getResponse("EXPN " ~ mailinglist));
 	}
 
 	/++
-	 Performs disconnection from server. In one session several mails can be sent,
-	 and it is recommended to do so. quit forces server to close connection with
+	 Performs disconnection from server. You can send multiple emails in one session,
+	 and it is recommended to do so. 'quit' forces server to close connection with
 	 client.
 	 +/
 	final SmtpReply quit() {
@@ -299,8 +299,7 @@ public:
 
 	/++
 	 Performs clean disconnection from server.
-	 It is recommended to use disconnect after quit method which signals
-	 SMTP server about end of the session.
+	 It is recommended to use 'disconnect' after 'quit' method.
 	 +/
 	void disconnect() {
 		this.transport.shutdown(SocketShutdown.BOTH);

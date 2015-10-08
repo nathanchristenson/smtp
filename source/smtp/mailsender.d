@@ -141,7 +141,7 @@ version(ssl) {
 
 version(ssl){
 	/++
-	 Connecting to SMTP server and also trying to get server possibiities
+	 Connecting to SMTP server and also trying to get server possibilities
 	 in order to expose it via public API.
 	 +/
 	SmtpReply connect() {
@@ -160,7 +160,7 @@ version(ssl){
 	}
 } else {
 	/++
-	 Connecting to SMTP server and also trying to get server possibiities
+	 Connecting to SMTP server and also trying to get server possibilities
 	 in order to expose it via public API.
 	 +/
 	SmtpReply connect() {
@@ -172,7 +172,7 @@ version(ssl){
 }
 
 	/++
-	 Perfrom authentication process in one method (high-level) instead
+	 Perform authentication process in one method (high-level) instead
 	 of sending AUTH and auth data in several messages.
 
 	 Auth schemes accoring to type:
@@ -209,9 +209,9 @@ version(ssl){
 	 High-level method for sending messages.
 
 	 Accepts SmtpMessage instance and returns true
-	 if message was sent successfully or false otherwise.
+	 if message was sent successfully or false if not.
 
-	 This method is recommended in order to simplify the whole workflow
+	 This method is recommended in order to simplify the workflow
 	 with the `smtp` library.
 
 	 send method basically implements [mail -> rcpt ... rcpt -> data -> dataBody]

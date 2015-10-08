@@ -1,11 +1,11 @@
 ## SMTP library for D - version 0.3
 
-Native synchronous SMTP client implementation in D language. Get at official Dub repository: [code.dlang.org](http://code.dlang.org/packages/smtp)
+Native synchronous SMTP client implementation written in the [D programming language](http://www.dlang.org). Available via the official dlang Dub repository: [code.dlang.org](http://code.dlang.org/packages/smtp)
 
 Tested with:
  - `dmd-2.066.0` stable on Ubuntu 15.04 Vivid Vervet
 
-## Features Supported
+## Features Supported as of version 0.3
 
  1. Low-level SMTP client via `SmtpClient`.
  2. High-level SMTP client via `MailSender`.
@@ -30,10 +30,11 @@ Tested with:
 
 ## Installation
 
-You can use `smtp` library for D via `dub` package manager.
-For this, follow the next steps:
+To use the `smtp` library for D via `dub` package manager, follow these steps:
 
- 1. Download dub from [DLang site](http://code.dlang.org) (if you still don't have it installed).
+ 1. If you do not yet have `dub` installed:
+ On some Linux distros, `dub` can be installed via the package manager, so check there first.
+ You can download `dub` directly from the [D Package Repository](http://code.dlang.org/download).
  2. Create your project (or use `dub.json` from your existing one).
  3. Add `smtp` as a dependency:
 

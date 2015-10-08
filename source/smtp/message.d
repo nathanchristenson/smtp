@@ -6,7 +6,7 @@ import std.uuid;
 import smtp.attachment;
 
 /++
- Struct that holds name and address of a person holding e-mail box
+  Struct that holds name and address of a person holding e-mail box
   and is capable of sending messages.
  +/
 struct Recipient {
@@ -64,8 +64,8 @@ struct SmtpMessage {
 	}
 
 	/++
-	  Builds message representation in case we have multipart/mixed MIME-type
-		of the message to send.
+         Builds message representation in case we have multipart/mixed MIME-type
+         of the message to send.
 	 +/
 	private string messageWithAttachments() const {
 		const string crlf = "\r\n";
@@ -89,8 +89,8 @@ struct SmtpMessage {
 	/++
 	  This method converts SmtpMessage struct to string representation.
 
-		This string representation is a ready-to-send representation for
-		SMTP protocol.
+          This string representation is a ready-to-send representation for
+          SMTP protocol.
 	 +/
 	string toString() const {
 		const string tFrom      = "From: \"%s\" <%s>\r\n";
