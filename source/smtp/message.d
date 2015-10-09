@@ -79,7 +79,7 @@ struct SmtpMessage
         +/
         private string cc() const {
                 string cc = "";
-                if (expandCC = true && messageTo.length > 1) 
+                if (expandCC == true && messageTo.length > 1) 
                 {
                         string fCc = " \"%s\" <%s>";
                         foreach(recipient; messageTo) 
