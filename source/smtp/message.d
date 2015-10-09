@@ -71,15 +71,16 @@ struct SmtpMessage
         want everyone to know. But then you should use BCC, yes?
         +/
         private string cc() const {
-                string tCc = "Cc:\"%s\" <%s>\r\n";
+                string fCc = " \"%s\" <%s>";
                 string cc = "";
-                if (messageTo.length > 1) {
-                        foreach(recipient; messageTo) {
-                                cc ~= format(tCc, recipient.name, recipient.address);
+                if (messageTo.length > 1) 
+                {
+                        foreach(recipient; messageTo) 
+                        {
+                                cc ~= format(fCc, recipient.name, recipient.address);
                         }
-                } else {
-                        cc = "";
-                }
+                        cc = "Cc:" ~ cc ~ "\r\n";
+                } 
                 return cc;
         }
 
