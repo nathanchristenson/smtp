@@ -5,7 +5,7 @@ import std.uuid;
 import std.datetime;
 
 import smtp.attachment;
-// import smtp.utils;
+import smtp.utils;
 
 /++
 Struct that holds an email address and, optionally, a name associated with 
