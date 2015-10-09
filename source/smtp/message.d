@@ -11,7 +11,8 @@ import smtp.utils;
 Struct that holds an email address and, optionally, a name associated with 
 that email address.
 +/
-struct Mailbox {
+struct Mailbox 
+{
         string address;
         string name;
 }
@@ -26,7 +27,8 @@ Currently provides:
 
 SmtpClient.send uses SmtpMessage to compose, format and send email via SMTP.
 +/
-struct SmtpMessage {
+struct SmtpMessage 
+{
         static string boundary;                                 // Parts delmiter in multipart message
         // Email headers
         Mailbox messageFrom;                                    // Specifies name/address of a sender
