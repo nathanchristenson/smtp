@@ -5,7 +5,7 @@ import std.uuid;
 import std.datetime;
 
 import smtp.attachment;
-import smtp.utils;
+// import smtp.utils;
 
 /++
 Struct that holds an email address and, optionally, a name associated with 
@@ -33,8 +33,8 @@ struct SmtpMessage {
         Mailbox[] messageTo;                                    // Array of Recipients that holds recipients
         Mailbox[] messageBcc;                                   // Array of email addresses to BCC
         SysTime messageDatestamp;                               // Message date and time, defaults to when message creates
-        string contentType = "text/plain";                      // message content type, default to 'text/plain'
-        string charSet = "utf-8";                               // character set, default to 'UTF-8'
+        string contentType          =   "text/plain";           // message content type, default to 'text/plain'
+        string charSet              =   "utf-8";                // character set, default to 'UTF-8'
         string replyTo;                                         // Setting "Reply To" helps make message chains
         string messageSubject;                                  // Message subject
         // Email message body
