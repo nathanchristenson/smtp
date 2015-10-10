@@ -29,20 +29,27 @@ SmtpClient.send uses SmtpMessage to compose, format and send email via SMTP.
 +/
 struct SmtpMessage 
 {
-        static string boundary;                                 // Parts delmiter in multipart message
+        // message boundary
+        static string boundary;                                         // Parts delmiter in multipart message
+ 
         // Email headers
-        Mailbox messageFrom;                                    // Specifies name/address of a sender
-        Mailbox[] messageTo;                                    // Array of Recipients that holds recipients
-        Mailbox[] messageBcc;                                   // Array of email addresses to BCC
-        SysTime messageDatestamp;                               // Message date and time, defaults to when message creates
-        string contentType          =   "text/plain";           // message content type, default to 'text/plain'
-        string charSet              =   "utf-8";                // character set, default to 'UTF-8'
-        string replyTo;                                         // Setting "Reply To" helps make message chains
-        string messageSubject;                                  // Message subject
+        Mailbox messageFrom;                                            // Specifies name/address of a sender
+        Mailbox[] messageTo;                                            // Array of Recipients that holds recipients
+        Mailbox[] messageBcc;                                           // Array of email addresses to BCC
+        SysTime messageDatestamp;                                       // Message date and time, defaults to when message creates
+        string contentType              =       "text/plain";           // message content type, default to 'text/plain'
+        string charSet                  =       "utf-8";                // character set, default to 'UTF-8'
+        string replyTo;                                                 // Setting "Reply To" helps make message chains
+        string messageSubject;                                          // Message subject
+ 
         // Email message body
-        string messageBody;                                     // Message text (body)
+        string messageBody;                                             // Message text (body)
+ 
         //Email attachements
-        SmtpAttachment[] attachments;                           // Attachments to message
+        SmtpAttachment[] attachments;                                   // Attachments to message
+        
+        // Message options - should probably move this to how it's sent?
+        bool expandCC                   =       true;                   // Can set whether or not to expand cc field - default is YES              
 
         /++
         Initializes a boundary for parts in multipart/mixed message type.
@@ -71,15 +78,16 @@ struct SmtpMessage
         want everyone to know. But then you should use BCC, yes?
         +/
         private string cc() const {
-                string tCc = "Cc:\"%s\" <%s>\r\n";
                 string cc = "";
-                if (messageTo.length > 1) {
-                        foreach(recipient; messageTo) {
-                                cc ~= format(tCc, recipient.name, recipient.address);
+                if (expandCC == true && messageTo.length > 1) 
+                {
+                        string fCc = " \"%s\" <%s>";
+                        foreach(recipient; messageTo) 
+                        {
+                                cc ~= format(fCc, recipient.name, recipient.address);
                         }
-                } else {
-                        cc = "";
-                }
+                        cc = "Cc:" ~ cc ~ "\r\n";
+                } 
                 return cc;
         }
 
