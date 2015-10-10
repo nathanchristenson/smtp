@@ -137,7 +137,6 @@ struct SmtpMessage
                 const string tFrom            = "From: \"%s\" <%s>\r\n";
                 const string tTo              = "To: \"%s\" <%s>\r\n";
                 const string tSubject         = "Subject: %s\r\n";
-                const string tDate            = "Date: %s\r\n"; 
                 const string mime             = "MIME-Version: 1.0\r\n";
                 const string tContentType     = "Content-Type: %s; charset= %s\r\n";
                 const string tMultipart       = "Content-Type: multipart/mixed; boundary=\"%s\"\r\n";
@@ -150,7 +149,7 @@ struct SmtpMessage
                         ~ format(tTo, messageTo[0].name, messageTo[0].address)
                                 ~ cc()
                                 ~ format(tSubject, messageSubject)
-                                ~ format(tDate, writeUFC2822DateHeader(messageDatestamp))
+                                ~ dateMessage()
                                 ~ mime
                                 ~ format(tContentType, contentType, charSet)
                                 ~ format(tReplyTo, replyTo)
