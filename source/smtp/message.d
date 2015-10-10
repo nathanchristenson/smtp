@@ -108,11 +108,18 @@ struct SmtpMessage
 
         /++
         Function for setting email Date header - which cannot be set as default 
-        because SysTime won't work at compile time
+        because SysTime won't work at compile time.
+        
+        This will set the date header as of the time this function is called if
+        the date has not yet been sent.
         +/
         private string dateMessage() const {
                 string tDate = "Date: %s\r\n";
-                return(format(tDate, writeUFC2822DateHeader(Clock.currTime())));
+                if (messageDatestamp is SysTime.init)
+                {
+                        messageDatestamp = Clock.currTime();
+                }
+                return(format(tDate, writeUFC2822DateHeader(messageDatestamp)));
         }
         /++
         Converts message into ready-to-send string representation that 
